@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viking Stage</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Viking Stage</h1>
+            <div class="header-controls">
+                <div class="status-indicator" id="status">●</div>
+                <button class="settings-btn" id="settings-btn" title="Settings">⚙️</button>
+            </div>
+        </header>
+
+        <div class="sensor-grid">
+            <div class="sensor-card" id="temperature-card">
+                <h2>Temperature</h2>
+                <div class="sensor-value">
+                    <span id="temperature">--.-</span>
+                    <span class="unit">°C</span>
+                </div>
+                <div class="threshold">Threshold: <span id="temp-threshold">{{ settings.TEMPERATURE_THRESHOLD }}</span>°C</div>
+            </div>
+
+            <div class="sensor-card" id="heart-rate-card">
+                <h2>Heart Rate</h2>
+                <div class="sensor-value">
+                    <span id="heart-rate">--</span>
+                    <span class="unit">BPM</span>
+                </div>
+                <div class="threshold">Threshold: <span id="hr-threshold">{{ settings.HEART_RATE_THRESHOLD }}</span> BPM</div>
+            </div>
+
+            <div class="sensor-card" id="gforce-card">
+                <h2>G-Force</h2>
+                <div class="sensor-value">
+                    <span id="gforce">--.-</span>
+                    <span class="unit">g</span>
+                </div>
+                <div class="threshold">Threshold: <span id="gforce-threshold">{{ settings.GFORCE_THRESHOLD }}</span>g</div>
+            </div>
+
+
+<!--            <div class="sensor-card">-->
+<!--                <h2>Gyroscope</h2>-->
+<!--                <div class="xyz-data">-->
+<!--                    <div>X: <span id="gyro-x">&#45;&#45;.&#45;&#45;</span>°/s</div>-->
+<!--                    <div>Y: <span id="gyro-y">&#45;&#45;.&#45;&#45;</span>°/s</div>-->
+<!--                    <div>Z: <span id="gyro-z">&#45;&#45;.&#45;&#45;</span>°/s</div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            <div class="sensor-card">-->
+<!--                <h2>Accelerometer</h2>-->
+<!--                <div class="xyz-data">-->
+<!--                    <div>X: <span id="accel-x">&#45;&#45;.&#45;&#45;</span> m/s²</div>-->
+<!--                    <div>Y: <span id="accel-y">&#45;&#45;.&#45;&#45;</span> m/s²</div>-->
+<!--                    <div>Z: <span id="accel-z">&#45;&#45;.&#45;&#45;</span> m/s²</div>-->
+<!--                </div>-->
+<!--            </div>-->
+        </div>
+
+        <div class="last-update">
+            Last updated: <span id="last-update">Never</span>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="modal" id="settings-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Settings</h2>
+                <button class="close-btn" id="close-settings">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="setting-group">
+                    <label for="temp-threshold-input">Temperature Threshold (°C)</label>
+                    <input type="number" id="temp-threshold-input" min="0" max="100" step="1" value="{{ settings.TEMPERATURE_THRESHOLD }}">
+                    <small>Range: 0.0 - 100.0°C</small>
+                </div>
+                <div class="setting-group">
+                    <label for="hr-threshold-input">Heart Rate Threshold (BPM)</label>
+                    <input type="number" id="hr-threshold-input" min="0" max="220" step="1" value="{{ settings.HEART_RATE_THRESHOLD }}">
+                    <small>Range: 0 - 220 BPM</small>
+                </div>
+                <div class="setting-group">
+                    <label for="gforce-threshold-input">G-Force Threshold (g)</label>
+                    <input type="number" id="gforce-threshold-input" min="0" max="10.0" step="0.5" value="{{ settings.GFORCE_THRESHOLD }}">
+                    <small>Range: 0 - 10.0g</small>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancel-settings">Cancel</button>
+                <button class="btn btn-primary" id="save-settings">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

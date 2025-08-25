@@ -1,0 +1,4 @@
+Flask
+mpu6050-raspberrypi
+PyMLX90614
+adafruit-ads1x15
